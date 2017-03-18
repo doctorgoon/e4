@@ -1,0 +1,27 @@
+
+body {
+    background-color: #838383;
+    margin: 0 auto;
+    max-width: 50em;
+    font-family: "courrier", serif;
+    color: #555;
+    line-height: 1.5;
+    padding: 4em 1em;
+}
+
+h1   {
+    color: #232323;
+}
+
+h2   {
+    margin-top: 1em;
+    padding-top: 1em;
+}
+
+strong {
+    color: #333;
+}
+
+a {
+    color: #06b700;
+}

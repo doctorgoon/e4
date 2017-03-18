@@ -1,0 +1,24 @@
+.btn-fixed-right {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    z-index: 999;
+}
+
+.img_profile {
+    width: 40px;
+    height: 40px;
+    -webkit-border-radius: 40px;
+    -moz-border-radius: 40px;
+    border-radius: 40px;
+}
+
+.card-head h3 {
+    padding-left: 10px;
+    margin-top: 15px;
+}
+.card-head h4 {
+    padding-left: 10px;
+    margin-top: 20px;
+    font-weight: bold;
+}

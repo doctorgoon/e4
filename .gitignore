@@ -1,0 +1,6 @@
+Homestead.yaml
+Homestead.json
+.env
+/.idea
+/storage/logs
+/storage/framework/sessions
