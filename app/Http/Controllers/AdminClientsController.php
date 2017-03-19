@@ -8,6 +8,8 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 
 class AdminClientsController extends Controller
 {
@@ -31,6 +33,12 @@ class AdminClientsController extends Controller
         return view('mirfrance.admin.clients.add-client');
     }
 
+    public function addClientCall($id)
+    {
+        $call = Calls::find($id);
+
+        return view('mirfrance.admin.clients.add-client-call', compact('call'));
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -40,30 +48,87 @@ class AdminClientsController extends Controller
      */
     public function postAddClient(Request $request)
     {
+        $client = Clients::where([
+            ['lastname', $request->input('lastname')],
+            ['email', $request->input('email')],
+        ])->get()->first();
+
         $this->validate($request, [
             'lastname'  => 'required',
             'firstname' => 'required',
-            'email'     => 'required|email'
+            'phone'     => 'required_without:email|numeric',
+            'email'     => 'required_without:phone|email'
         ]);
 
-        $client             = new Clients();
-        $client->num        = $request->input('num');
-        $client->company    = $request->input('company');
-        $client->lastname   = $request->input('lastname');
-        $client->firstname  = $request->input('firstname');
-        $client->address    = $request->input('address');
-        $client->zipcode    = $request->input('zipcode');
-        $client->city       = $request->input('city');
-        $client->phone      = $request->input('phone');
-        $client->mobile     = $request->input('mobile');
-        $client->fax        = $request->input('fax');
-        $client->email      = $request->input('email');
-        $client->created_at = Carbon::now();
-        $client->updated_at = Carbon::now();
+        if (is_null($client)) {
 
-        $client->save();
+            $client             = new Clients();
+            $client->num        = $request->input('num');
+            $client->company    = $request->input('company');
+            $client->lastname   = $request->input('lastname');
+            $client->firstname  = $request->input('firstname');
+            $client->address    = $request->input('address');
+            $client->zipcode    = $request->input('zipcode');
+            $client->city       = $request->input('city');
+            $client->phone      = $request->input('phone');
+            $client->mobile     = $request->input('mobile');
+            $client->fax        = $request->input('fax');
+            $client->email      = $request->input('email');
+            $client->created_at = Carbon::now();
+            $client->updated_at = Carbon::now();
 
-        return redirect(action('AdminClientsController@clients'));
+            $client->save();
+
+            return redirect(action('AdminCallsController@clients'));
+        }
+        else {
+            return Redirect::to('administration/clients')->with('flash_error', 'Le client existe déjà');
+        }
+    }
+
+
+    public function postAddClientCall(Request $request)
+    {
+        $client = Clients::where([
+            'lastname' => $request->input('lastname'),
+            'email' => $request->input('email'),
+        ])->get()->first();
+
+        $this->validate($request, [
+            'lastname'  => 'required',
+            'firstname' => 'required',
+            'phone'     => 'required_without:email|numeric',
+            'email'     => 'required_without:phone|email'
+        ]);
+
+        if (is_null($client)) {
+
+            $client             = new Clients();
+            $client->num        = $request->input('num');
+            $client->company    = $request->input('company');
+            $client->lastname   = $request->input('lastname');
+            $client->firstname  = $request->input('firstname');
+            $client->address    = $request->input('address');
+            $client->zipcode    = $request->input('zipcode');
+            $client->city       = $request->input('city');
+            $client->phone      = $request->input('phone');
+            $client->mobile     = $request->input('mobile');
+            $client->fax        = $request->input('fax');
+            $client->email      = $request->input('email');
+            $client->created_at = Carbon::now();
+            $client->updated_at = Carbon::now();
+
+            $client->save();
+
+            return redirect(action('AdminCallsController@pairCall', $request->input('invisible')));
+        }
+        else {
+            $call = Calls::find($request->input('invisible'));
+
+            $exist =  'Le client existe déjà, retrouvez le ci-dessous';
+
+            return view('mirfrance.admin.calls.pair-call', compact('call', 'exist'));
+        }
     }
 
     /**
@@ -158,7 +223,22 @@ class AdminClientsController extends Controller
         $client = Clients::find($id);
 
         if ( ! is_null($id)) {
+
+            return view('mirfrance.admin.clients.delete-client', compact('client'));
+        }
+
+        abort(404);
+    }
+
+    public function postDestroyClient($id, Request $request)
+    {
+        $client = Clients::find($id);
+
+        if ( ! is_null($id)) {
+
             $client->delete();
+
+            Session::flash('flash_message', 'Le client a bien été supprimée');
 
             return redirect(action('AdminClientsController@clients'));
         }

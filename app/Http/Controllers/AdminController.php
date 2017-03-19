@@ -4,10 +4,16 @@ namespace App\Http\Controllers;
 
 use App\AdminUsers;
 use App\UsersNotes;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Validator;
 use Carbon\Carbon;
 
 use App\Http\Requests;
+//use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 
 class AdminController extends Controller
@@ -28,7 +34,6 @@ class AdminController extends Controller
                 return redirect(action('AdminController@dashboard'));
             }
         }*/
-        // merci x)
 
         return view('mirfrance.admin.login-user');
     }
@@ -53,11 +58,9 @@ class AdminController extends Controller
         if ( ! is_null($user)) {
 
             $token = str_random(100);
-
             $user->token       = $token;
             $user->ip          = $_SERVER['REMOTE_ADDR'];
             $user->last_access = Carbon::now();
-
             $user->save();
 
             Session::put('email', $request->input('username'));
@@ -70,11 +73,9 @@ class AdminController extends Controller
 
             return redirect(action('AdminController@dashboard'));
         } else {
-            Session::flash('flash_error', 'Identification échouée');
-
-
+            return Redirect::to('administration')->with('flash_error', 'Identification échouée');
+            //Session::flash('flash_error', 'Identification échouée');
         }
-        //return redirect(action('AdminController@dashboard'));
     }
 
     public function logoutUser()

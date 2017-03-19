@@ -9,10 +9,12 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-head style-{{ Config::get('status_color.' . $call->status) }}">
+                    <a class="btn ink-reaction btn-floating-action btn-lg btn-default btn-fixed-right"  href="{{ action('AdminClientsController@addClientCall', [$call->id]) }}"><i class="glyphicon glyphicon-plus"></i></a>
                     <h2 style="padding-left: 10px; padding-bottom: 10px ">
                         <a href="{{ action('AdminCallsController@showCall', [$call->id]) }}" class="btn btn-icon">
                             <i class="glyphicon glyphicon-arrow-left" style="display: inline; font-size: 18px; line-height: 0px;"></i>
                         </a>
+                        @if(isset($exist)) {{$exist}} @else Associer à un client @endif
                     </h2>
                 </div>
                 <div class="card-body">

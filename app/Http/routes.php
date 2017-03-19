@@ -51,8 +51,8 @@ Route::get('/administration/appels/{id}', 'AdminCallsController@showCall');
 Route::post('/administration/appels/nouveau', 'AdminCallsController@postAddCall');
 Route::get('/administration/appels/{id}/modifier', 'AdminCallsController@editCall');
 Route::post('/administration/appels/{id}/modifier', 'AdminCallsController@postEditCall');
-Route::get('/administration/appels/{id}/associer', 'AdminCallsController@pairCall');
-Route::post('/administration/appels/{id}/associer', 'AdminCallsController@postPairCall');
+Route::get('/administration/appels/associer/{id}', 'AdminCallsController@pairCall');
+Route::post('/administration/appels/associer/{id}', 'AdminCallsController@postPairCall');
 
 // TICKETS
 Route::get('/administration/tickets/{id}/nouveau', 'AdminCallsController@addTicket');
@@ -65,11 +65,15 @@ Route::post('/administration/tickets/{id}/changer-statut', 'AdminCallsController
 // CLIENTS
 Route::get('/administration/clients', 'AdminClientsController@clients');
 Route::get('/administration/clients/nouveau', 'AdminClientsController@addClient');
+Route::get('/administration/clients/call/{id}/nouveau', 'AdminClientsController@addClientCall');
+Route::post('/administration/clients/call/{id}/nouveau', 'AdminClientsController@postAddClientCall');
 Route::post('/administration/clients/rechercher-client/{origin}', 'AdminClientsController@postSearchClient');
 Route::get('/administration/clients/{id}', 'AdminClientsController@showClient');
 Route::post('/administration/clients/nouveau', 'AdminClientsController@postAddClient');
 Route::get('/administration/clients/{id}/modifier', 'AdminClientsController@editClient');
 Route::post('/administration/clients/{id}/modifier', 'AdminClientsController@postEditClient');
+Route::get('/administration/clients/{id}/supprimer', 'AdminClientsController@destroyClient');
+Route::post('/administration/clients/{id}/supprimer', 'AdminClientsController@postDestroyClient');
 
 // PRODUITS
 Route::get('/administration/produits', 'AdminProductsController@products');

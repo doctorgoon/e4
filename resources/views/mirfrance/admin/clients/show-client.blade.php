@@ -11,6 +11,13 @@
                 <div class="card">
                     <div class="card-head style-info">
                         <header style="font-size: 22px; padding-top: 17px">Fiche Client</header>
+
+                        <a href="{{ action('AdminClientsController@destroyClient', [$client->id]) }}" style="padding-top: 25px; padding-right: 30px" class="btn btn-icon pull-right">
+                        <i class="glyphicon glyphicon-trash" style="display: inline; font-size: 25px; line-height: 0px;"></i></a>
+
+                        <a href="{{ action('AdminClientsController@editClient', [$client->id]) }}" style="padding-top: 25px; padding-right: 30px" class="btn btn-icon pull-right">
+                        <i class="glyphicon glyphicon-pencil" style="display: inline; font-size: 25px; line-height: 0px;"></i></a>
+
                     </div>
                     <form class="form" role="form">
                         <!-- BEGIN DEFAULT FORM ITEMS -->
@@ -158,8 +165,10 @@
                         <div class="card-actionbar">
                             <div class="card-actionbar-row">
                                 <a class="btn btn-flat" href="{{ action('AdminClientsController@clients') }}">Retour</a>
-                                <a class="btn btn-flat" href="{{ action('AdminClientsController@editClient', [$client->id]) }}">Modifier Client</a>
-                            </div><!--end .card-actionbar-row -->
+                            </div><!--end .card-actionbar-row
+                            <div class="card-actionbar-row">
+                                <a class="btn btn-flat btn-danger" href="{{ action('AdminClientsController@destroyClient', [$client->id]) }}">Supprimer Client</a>
+                            </div>--><!--end .card-actionbar-row -->
                         </div><!--end .card-actionbar -->
                         <!-- END FORM FOOTER -->
 

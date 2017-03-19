@@ -10,7 +10,7 @@
                     <h3 style="padding-left: 20px;">
                         {{ Config::get('call_status.' . $call->status) }} &nbsp - &nbsp @if($call->status == 1) le @else Derniere modification :@endif {{ get_french_date($call->updated_at) }}
 
-                        &nbsp - &nbsp Durée totale : {{ substr(get_total_duration($call), 2) }}
+                        @if(get_total_duration($call) > 0) &nbsp - &nbsp Durée totale : {{ substr(get_total_duration($call), 2) }} @endif
 
                         @if ( ! is_null($call->client_id))
                             <a href="{{ action('AdminClientsController@showClient', [$call->client_id]) }}" style="padding-top: 12px; padding-right: 30px" class="btn btn-icon pull-right">
