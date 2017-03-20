@@ -13,11 +13,20 @@ class AdminProductsController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function products()
+    public function products(Request $request)
     {
-        $products = Products::orderBy('created_at', 'asc')->get();
+        $search = $request->input('contactSearch');
+
+        if(is_null($search)) {
+            $products = Products::all()->sortBy('created_at');
+        }
+        else {
+            $products = Products::where('name','like','%'.$search.'%')
+                ->orWhere('ref','like','%'.$search.'%')->get();
+        }
 
         return view('mirfrance.admin.products.products', compact('products'));
     }
@@ -43,17 +52,14 @@ class AdminProductsController extends Controller
     {
         $this->validate($request, [
             'name'         => 'required',
-            'price'        => 'required',
-            'online'       => 'required',
-            'categorie_id' => 'required'
+            'ref'          => 'required',
         ]);
 
         $product              = new Products();
         $product->name        = $request->input('name');
         $product->ref         = $request->input('ref');
-        $product->description = $request->input('description');
-        $product->price       = $request->input('price');
-        $product->image       = $request->input('image');
+        $product->available   = $request->input('available');
+        $product->expedited   = $request->input('expedited');
 
         if ( ! is_null($request->file('upload'))) {
             $imageName = $request->input('name') . rand(1, 100) . '.jpg';
@@ -63,8 +69,6 @@ class AdminProductsController extends Controller
             $product->image = $path . $imageName;
         }
 
-        $product->categorie_id = $request->input('categorie_id');
-        $product->online       = $request->input('online');
         $product->created_at   = Carbon::now();
         $product->updated_at   = Carbon::now();
 
@@ -125,17 +129,14 @@ class AdminProductsController extends Controller
 
             $this->validate($request, [
                 'name'         => 'required',
-                'price'        => 'required',
-                'online'       => 'required',
-                'categorie_id' => 'required'
+                'ref'          => 'required',
             ]);
 
             $product->updated_at   = Carbon::now();
             $product->name         = $request->input('name');
-            $product->description  = $request->input('description');
-            $product->price        = $request->input('price');
             $product->ref          = $request->input('ref');
-            $product->image        = $request->input('image');
+            $product->available    = $request->input('available');
+            $product->expedited    = $request->input('expedited');
 
             if ( ! is_null($request->file('upload'))) {
                 $imageName = $request->input('name') . rand(1, 100) . '.jpg';
@@ -144,9 +145,6 @@ class AdminProductsController extends Controller
                 $file->move(public_path() . '\imgs\uploads', $imageName);
                 $product->image = $path . $imageName;
             }
-
-            $product->categorie_id = $request->input('categorie_id');
-            $product->online       = $request->input('online');
 
             $product->save();
 

@@ -1,8 +1,6 @@
-@extends('templates.layout-admin')
+<?php $__env->startSection('title'); ?> Produits  <?php $__env->stopSection(); ?>
 
-@section('title') Produits  @endsection
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 
     <section>
         <div class="section-header">
@@ -17,22 +15,24 @@
                 <!-- BEGIN SEARCH HEADER -->
                 <div class="card-head style-primary">
                     <div class="tools pull-left">
-                        {!! Form::open(['method'=>'GET','url'=>'administration/produits','class'=>'navbar-search','role'=>'search'])  !!}
+                        <?php echo Form::open(['method'=>'GET','url'=>'administration/produits','class'=>'navbar-search','role'=>'search']); ?>
+
                         <div class="form-group">
                             <input type="text" class="form-control" name="contactSearch" placeholder="Rechercher...">
                         </div>
                         <button type="submit" class="btn btn-icon-toggle ink-reaction"><i class="fa fa-search"></i></button>
-                        {!! Form::close() !!}
+                        <?php echo Form::close(); ?>
+
                     </div>
                     <div class="tools pull-left" style="padding: 8px">
-                        <a href="{{action('AdminProductsController@products')}}">
+                        <a href="<?php echo e(action('AdminProductsController@products')); ?>">
                             <button type="submit" class="btn btn-icon-toggle ink-reaction">
                                 <i class="fa fa-refresh" style="font-size: 12pt"></i>
                             </button>
                         </a>
                     </div>
                     <div class="tools" style="padding-top: 5px">
-                        <a class="btn btn-floating-action btn-default-light" href="{{ action('AdminProductsController@addProduct') }}"><i class="fa fa-plus"></i></a>
+                        <a class="btn btn-floating-action btn-default-light" href="<?php echo e(action('AdminProductsController@addProduct')); ?>"><i class="fa fa-plus"></i></a>
                     </div>
                 </div><!--end .card-head -->
                 <!-- END SEARCH HEADER -->
@@ -54,33 +54,35 @@
 
                             <!-- BEGIN SEARCH RESULTS LIST -->
                             <ul class="list divider-full-bleed">
-                                @if(count($products) < 1)
+                                <?php if(count($products) < 1): ?>
                                     AUCUN PRODUIT TROUVÉ
-                                @else
-                                    @foreach( $products as $product )
+                                <?php else: ?>
+                                    <?php foreach( $products as $product ): ?>
                                         <li class="tile">
-                                            <a href="{{ action('AdminProductsController@showProduct', [$product->id]) }}" class="tile-content ink-reaction">
+                                            <a href="<?php echo e(action('AdminProductsController@showProduct', [$product->id])); ?>" class="tile-content ink-reaction">
                                                 <div class="tile-icon">
-                                                    <img src="{{ $product->image }}" alt="">
+                                                    <img src="<?php echo e($product->image); ?>" alt="">
                                                 </div>
 
                                                 <div class="tile-text">
-                                                    {{ $product->name}}
+                                                    <?php echo e($product->name); ?>
+
                                                     <small>
-                                                        @if($product->online == 1)
+                                                        <?php if($product->online == 1): ?>
                                                             <i style="padding-right: 20px; font-size: 20px" class="md md-public pull-right"></i>
-                                                        @endif
+                                                        <?php endif; ?>
                                                     </small>
 
                                                     <small>
-                                                        #{{ $product->ref}}
+                                                        #<?php echo e($product->ref); ?>
+
                                                     </small>
                                                 </div>
 
                                             </a>
                                         </li>
-                                    @endforeach
-                                @endif
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
                             </ul>
 
                         </div><!--end .col -->
@@ -93,4 +95,6 @@
         </div><!--end .section-body -->
     </section>
 
-@stop
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('templates.layout-admin', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

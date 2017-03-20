@@ -105,7 +105,7 @@
                         </div><br>
 
                         <div class="form-group">
-                            {!! Form::submit($submitButtonText, ['class' => 'btn btn-flat btn-primary ink-reaction']) !!}
+                            {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary ink-reaction']) !!}
                         </div>
 
                         {!! Form::close() !!}

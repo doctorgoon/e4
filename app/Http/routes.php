@@ -64,6 +64,7 @@ Route::post('/administration/tickets/{id}/changer-statut', 'AdminCallsController
 
 // CLIENTS
 Route::get('/administration/clients', 'AdminClientsController@clients');
+//Route::get('/administration/clients', 'AdminClientsController@searchClient');
 Route::get('/administration/clients/nouveau', 'AdminClientsController@addClient');
 Route::get('/administration/clients/call/{id}/nouveau', 'AdminClientsController@addClientCall');
 Route::post('/administration/clients/call/{id}/nouveau', 'AdminClientsController@postAddClientCall');

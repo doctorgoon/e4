@@ -37,7 +37,7 @@
                 </div><!--end .card-body -->
                 <div class="card-actionbar">
                     <div class="card-actionbar-row">
-                        {!! Form::submit('Valider', ['class' => 'btn btn-flat btn-primary ink-reaction']) !!}
+                        {!! Form::submit('Valider', ['class' => 'btn btn-primary ink-reaction']) !!}
                     </div>
                 </div>
             </div><!--end .card -->

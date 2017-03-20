@@ -41,11 +41,11 @@
 
                 @if(isset($ticket))
                         <div class="form-group">
-                            {!! Form::submit('Modifier', ['class' => 'btn btn-flat btn-' . Config::get('status_color.' . $call->status). ' ink-reaction']) !!}
+                            {!! Form::submit('Modifier', ['class' => 'btn btn-' . Config::get('status_color.' . $call->status). ' ink-reaction']) !!}
                         </div>
                 @else
                         <div class="form-group">
-                            {!! Form::submit('Ajouter', ['class' => 'btn btn-flat btn-' . Config::get('status_color.' . $call->status). 'ink-reaction']) !!}
+                            {!! Form::submit('Ajouter', ['class' => 'btn btn-' . Config::get('status_color.' . $call->status). 'ink-reaction']) !!}
                         </div>
                 @endif
 

@@ -10,10 +10,8 @@ class Products extends Model
         'id',
         'name',
         'ref',
-        'description',
-        'price',
+        'available',
+        'expedited',
         'image',
-        'categorie_id',
-        'online',
     ];
 }

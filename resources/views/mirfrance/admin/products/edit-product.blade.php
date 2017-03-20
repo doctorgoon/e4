@@ -8,11 +8,8 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-head style-primary">
-                <h3>
-                    <a href="{{ action('AdminProductsController@showProduct', [$product->id] )}}" class="btn btn-icon">
-                        <i class="glyphicon glyphicon-arrow-left" style="display: inline; font-size: 18px; line-height: 0px;"></i>
-                    </a>
-                     &nbsp;
+                <h3 style="padding-left: 24px">
+                    Modifier le produit
                 </h3>
             </div>
             <div class="card-body">

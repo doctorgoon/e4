@@ -8,14 +8,12 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-head style-primary">
-                    <h3>
-                        <a href="{{ action('AdminProductsController@products') }}" class="btn btn-icon">
-                            <i class="glyphicon glyphicon-arrow-left" style="display: inline; font-size: 25px; line-height: 0px; padding-top: 800px"></i>
-                        </a>
+                    <h3 style="padding-left: 24px">
+                        Ajouter un nouveau produit
                     </h3>
                 </div>
                 <div class="card-body">
-                    @include('mirfrance.admin.products.form-products', ['submitButtonText' => 'Ajouter nouveau produit'])
+                    @include('mirfrance.admin.products.form-products', ['submitButtonText' => 'Ajouter'])
                 </div>
             </div>
         </div>

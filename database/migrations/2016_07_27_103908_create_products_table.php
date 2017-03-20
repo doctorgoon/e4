@@ -17,11 +17,9 @@ class CreateProductsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('ref');
-            $table->string('description');
-            $table->float('price')->nullable();
             $table->string('image', 255)->nullable();
-            $table->integer('categorie_id');
-            $table->boolean('online');
+            $table->boolean('available');
+            $table->boolean('expedited')->default(false);
 
             $table->timestamps();
         });

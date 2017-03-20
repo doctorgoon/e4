@@ -16,12 +16,27 @@ class AdminClientsController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param $request
      * @return \Illuminate\Http\Response
+     * @internal param string $order
      */
-    public function clients()
+    public function clients(Request $request)
     {
-        return view('mirfrance.admin.clients.clients');
+        $search = $request->input('contactSearch');
+
+        if(is_null($search)) {
+            $clients = Clients::all()->sortBy('lastname');
+        }
+        else {
+            $clients = Clients::where('lastname','like','%'.$search.'%')
+                ->orWhere('firstname','like','%'.$search.'%')
+                ->orWhere('company','like','%'.$search.'%')
+                ->orderBy('lastname', 'asc')->get();
+        }
+
+        return view('mirfrance.admin.clients.clients', compact('clients'));
     }
+
 
     /**
      * Show the form for creating a new resource.

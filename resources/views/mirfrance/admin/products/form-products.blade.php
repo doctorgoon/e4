@@ -16,21 +16,6 @@
 </div>
 
 <div class="form-group">
-    {!! Form::label('categorie_id', 'Catégorie ') !!}
-        {!! Form::select('categorie_id', array_merge(['' => ''] + $categorie_id), null, ['class' => 'form-control', 'autocomplete' => 'off']) !!}
-</div>
-
-<div class="form-group">
-    {!! Form::label('description', 'Description') !!}
-    {!! Form::textarea('description', null , ['class' => 'form-control', 'rows' => 3]) !!}
-</div>
-
-<div class="form-group">
-    {!! Form::label('price', 'Prix') !!}
-    {!! Form::text('price', null, ['class' => 'form-control']) !!}
-</div>
-
-<div class="form-group">
     {!! Form::label('image', 'URL de l\'image') !!}
     {!! Form::text('image', null, ['class' => 'form-control']) !!}
 </div>
@@ -43,12 +28,12 @@
 <br>
 
 <div class="form-group">
-    <div class="radio radio-styled">
+    <div class="checkbox checkbox-styled">
         <label>
-            {!! Form::radio('online', 0) !!} <span>Hors ligne</span> &nbsp;
+            {!! Form::checkbox('available', 0) !!} <span>Disponible</span> &nbsp;
         </label>
         <label>
-            {!! Form::radio('online', 1) !!} <span>En ligne</span>
+            {!! Form::checkbox('expedited', 0) !!} <span>Expédié</span>
         </label>
     </div>
 </div>
@@ -56,7 +41,7 @@
 
 <div class="form-group">
     <br>
-    {!! Form::submit($submitButtonText,  ['class' => 'btn btn-flat btn-primary ink-reaction']) !!}
+    {!! Form::submit($submitButtonText,  ['class' => 'btn btn-primary ink-reaction']) !!}
 </div>
 
 
