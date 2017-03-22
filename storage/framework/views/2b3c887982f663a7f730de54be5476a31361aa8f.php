@@ -42,52 +42,91 @@
 
                     <div class="card-head">
                         <ul class="nav nav-tabs" data-toggle="tabs">
-                            <li class="active"><a href="#all-calls">Disponibles</a></li>
-                            <li><a href="">Expédiés</a></li>
+                            <li class="active"><a href="#available">Disponibles</a></li>
+                            <li><a href="#expedited">Expédiés</a></li>
                         </ul>
                     </div>
 
                     <div class="tab-pane active" id="available">
-                    <div class="row">
+                        <div class="row">
+                            <div class="col-sm-8 col-md-9 col-lg-12">
+                                <!-- BEGIN SEARCH RESULTS LIST -->
+                                <ul class="list divider-full-bleed">
+                                    <?php if(count($products) < 1): ?>
+                                        AUCUN PRODUIT TROUVÉ
+                                    <?php else: ?>
+                                        <?php foreach( $products as $product ): ?>
+                                            <?php if($product->expedited != 1): ?>
+                                                <li class="tile">
+                                                    <a href="<?php echo e(action('AdminProductsController@showProduct', [$product->id])); ?>" class="tile-content ink-reaction">
+                                                        <div class="tile-icon">
+                                                            <img src="<?php echo e($product->image); ?>" alt="">
+                                                        </div>
 
-                        <div class="col-sm-8 col-md-9 col-lg-12">
+                                                        <div class="tile-text">
+                                                            <?php echo e($product->name); ?>
 
-                            <!-- BEGIN SEARCH RESULTS LIST -->
-                            <ul class="list divider-full-bleed">
-                                <?php if(count($products) < 1): ?>
-                                    AUCUN PRODUIT TROUVÉ
-                                <?php else: ?>
-                                    <?php foreach( $products as $product ): ?>
-                                        <li class="tile">
-                                            <a href="<?php echo e(action('AdminProductsController@showProduct', [$product->id])); ?>" class="tile-content ink-reaction">
-                                                <div class="tile-icon">
-                                                    <img src="<?php echo e($product->image); ?>" alt="">
-                                                </div>
+                                                            <small>
+                                                                #<?php echo e($product->ref); ?>
 
-                                                <div class="tile-text">
-                                                    <?php echo e($product->name); ?>
+                                                            </small>
+                                                        </div>
+                                                        <a href="<?php echo e(action('AdminProductsController@destroyProduct', [$product->id])); ?>" class="pull-right" style="padding-bottom: 10px; padding-right: 20px">
+                                                            <button type="button" class="btn ink-reaction btn-icon-toggle"><i class="glyphicon glyphicon-trash" style="font-size: 14px"></i></button>
+                                                        </a>
+                                                        <a href="<?php echo e(action('AdminProductsController@expeditProduct', [$product->id])); ?>" style="padding-bottom: 10px; padding-right: 20px" class="pull-right">
+                                                            <button type="button" class="btn ink-reaction btn-icon-toggle"><i class="glyphicon glyphicon-arrow-right" style="font-size: 14px"></i></button>
+                                                        </a>
+                                                    </a>
+                                                </li>
+                                            <?php endif; ?>
+                                        <?php endforeach; ?>
+                                    <?php endif; ?>
+                                </ul>
+                            </div><!--end .col -->
+                        </div><!--end .row -->
+                    </div>
 
-                                                    <small>
-                                                        <?php if($product->online == 1): ?>
-                                                            <i style="padding-right: 20px; font-size: 20px" class="md md-public pull-right"></i>
-                                                        <?php endif; ?>
-                                                    </small>
+                    <div class="tab-pane" id="expedited">
+                        <div class="row">
+                            <div class="col-sm-8 col-md-9 col-lg-12">
+                                <!-- BEGIN SEARCH RESULTS LIST -->
+                                <ul class="list divider-full-bleed">
+                                    <?php if(count($products) < 1): ?>
+                                        AUCUN PRODUIT TROUVÉ
+                                    <?php else: ?>
+                                        <?php foreach( $products as $product ): ?>
+                                            <?php if($product->expedited == 1): ?>
+                                                <li class="tile">
+                                                    <a href="<?php echo e(action('AdminProductsController@showProduct', [$product->id])); ?>" class="tile-content ink-reaction">
+                                                        <div class="tile-icon">
+                                                            <img src="<?php echo e($product->image); ?>" alt="">
+                                                        </div>
+                                                        <div class="tile-text">
+                                                            <?php echo e($product->name); ?>
 
-                                                    <small>
-                                                        #<?php echo e($product->ref); ?>
+                                                            <small>
+                                                                #<?php echo e($product->ref); ?>
 
-                                                    </small>
-                                                </div>
+                                                            </small>
+                                                        </div>
+                                                        <a href="<?php echo e(action('AdminProductsController@destroyProduct', [$product->id])); ?>" class="pull-right" style="padding-bottom: 10px; padding-right: 20px">
+                                                            <button type="button" class="btn ink-reaction btn-icon-toggle"><i class="glyphicon glyphicon-trash" style="font-size: 14px"></i></button>
+                                                        </a>
+                                                        <a href="<?php echo e(action('AdminProductsController@expeditProduct', [$product->id])); ?>" style="padding-bottom: 10px; padding-right: 20px" class="pull-right">
+                                                            <button type="button" class="btn ink-reaction btn-icon-toggle"><i class="glyphicon glyphicon-arrow-down" style="font-size: 14px"></i></button>
+                                                        </a>
+                                                        <div></div>
+                                                    </a>
+                                                </li>
+                                            <?php endif; ?>
+                                        <?php endforeach; ?>
+                                    <?php endif; ?>
+                                </ul>
+                            </div><!--end .col -->
+                        </div><!--end .row -->
+                    </div>
 
-                                            </a>
-                                        </li>
-                                    <?php endforeach; ?>
-                                <?php endif; ?>
-                            </ul>
-
-                        </div><!--end .col -->
-                    </div><!--end .row -->
-                        </div>
                 </div><!--end .card-body -->
                 <!-- END SEARCH RESULTS -->
 

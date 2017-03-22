@@ -64,7 +64,6 @@ Route::post('/administration/tickets/{id}/changer-statut', 'AdminCallsController
 
 // CLIENTS
 Route::get('/administration/clients', 'AdminClientsController@clients');
-//Route::get('/administration/clients', 'AdminClientsController@searchClient');
 Route::get('/administration/clients/nouveau', 'AdminClientsController@addClient');
 Route::get('/administration/clients/call/{id}/nouveau', 'AdminClientsController@addClientCall');
 Route::post('/administration/clients/call/{id}/nouveau', 'AdminClientsController@postAddClientCall');
@@ -80,6 +79,9 @@ Route::post('/administration/clients/{id}/supprimer', 'AdminClientsController@po
 Route::get('/administration/produits', 'AdminProductsController@products');
 Route::get('/administration/produits/ajouter', 'AdminProductsController@addProduct');
 Route::get('/administration/produits/{id}', 'AdminProductsController@showProduct');
+Route::get('/administration/produits/{id}', 'AdminProductsController@expeditProduct');
 Route::post('/administration/produits/ajouter', 'AdminProductsController@postAddProduct');
 Route::get('/administration/produits/{id}/modifier', 'AdminProductsController@editProduct');
 Route::post('/administration/produits/{id}/modifier', 'AdminProductsController@postEditProduct');
+Route::get('/administration/produits/{id}/supprimer', 'AdminProductsController@destroyProduct');
+Route::post('/administration/produits/{id}/supprimer', 'AdminProductsController@postDestroyProduct');

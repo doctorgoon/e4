@@ -28,6 +28,13 @@
                         <?php echo Form::close(); ?>
 
                     </div>
+                    <div class="tools pull-left" style="padding: 8px">
+                        <a href="<?php echo e(action('AdminClientsController@clients')); ?>">
+                            <button type="submit" class="btn btn-icon-toggle ink-reaction">
+                                <i class="fa fa-refresh" style="font-size: 12pt"></i>
+                            </button>
+                        </a>
+                    </div>
                     <div class="tools" style="padding-top: 5px">
                         <a class="btn btn-floating-action btn-default-light" href="<?php echo e(action('AdminClientsController@addClient')); ?>"><i class="fa fa-plus"></i></a>
                     </div>
@@ -61,7 +68,7 @@
                                 <?php foreach($clients as $client): ?>
                                 <div class="col-xs-12 col-lg-6 hbox-xs">
                                     <div class="hbox-column width-2">
-                                        <img class="img-circle img-responsive pull-left" src="\imgs\user.jpg'}}" alt="" title="" style="">
+                                        <img class="img-circle img-responsive pull-left" src="\imgs\user.jpg" alt="" title="" style="">
                                     </div>
                                     <div class="hbox-column v-top">
                                         <div class="clearfix">

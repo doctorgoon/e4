@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Session;
 
 class AdminProductsController extends Controller
 {
@@ -25,7 +26,7 @@ class AdminProductsController extends Controller
         }
         else {
             $products = Products::where('name','like','%'.$search.'%')
-                ->orWhere('ref','like','%'.$search.'%')->get();
+                ->orWhere('ref','like','%'.$search.'%')->orderBy('created_at')->get();
         }
 
         return view('mirfrance.admin.products.products', compact('products'));
@@ -154,6 +155,32 @@ class AdminProductsController extends Controller
         abort(404);
     }
 
+
+    public function expeditProduct($id)
+    {
+        $product = Products::find($id);
+
+        if ( ! is_null($id)) {
+
+            if ( $product->available == 1) {
+                $product->expedited  = 1;
+                $product->available  = 0;
+                $product->updated_at = carbon::now();
+                $product->save();
+            }
+            else {
+                $product->expedited  = 0;
+                $product->available  = 1;
+                $product->updated_at = carbon::now();
+                $product->save();
+            }
+
+            return redirect(action('AdminProductsController@products'));
+        }
+
+        abort(404);
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -161,12 +188,27 @@ class AdminProductsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroyProduct($id)
     {
         $product = Products::find($id);
 
         if ( ! is_null($id)) {
+
+            return view('mirfrance.admin.products.delete-product', compact('product'));
+        }
+
+        abort(404);
+    }
+
+    public function postDestroyProduct($id, Request $request)
+    {
+        $product = Products::find($id);
+
+        if ( ! is_null($id)) {
+
             $product->delete();
+
+            Session::flash('flash_message', 'Le produit a bien été supprimée');
 
             return redirect(action('AdminProductsController@products'));
         }

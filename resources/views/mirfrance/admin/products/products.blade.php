@@ -42,50 +42,87 @@
 
                     <div class="card-head">
                         <ul class="nav nav-tabs" data-toggle="tabs">
-                            <li class="active"><a href="#all-calls">Disponibles</a></li>
-                            <li><a href="">Expédiés</a></li>
+                            <li class="active"><a href="#available">Disponibles</a></li>
+                            <li><a href="#expedited">Expédiés</a></li>
                         </ul>
                     </div>
 
                     <div class="tab-pane active" id="available">
-                    <div class="row">
+                        <div class="row">
+                            <div class="col-sm-8 col-md-9 col-lg-12">
+                                <!-- BEGIN SEARCH RESULTS LIST -->
+                                <ul class="list divider-full-bleed">
+                                    @if(count($products) < 1)
+                                        AUCUN PRODUIT TROUVÉ
+                                    @else
+                                        @foreach( $products as $product )
+                                            @if($product->expedited != 1)
+                                                <li class="tile">
+                                                    <a href="{{ action('AdminProductsController@showProduct', [$product->id]) }}" class="tile-content ink-reaction">
+                                                        <div class="tile-icon">
+                                                            <img src="{{ $product->image }}" alt="">
+                                                        </div>
 
-                        <div class="col-sm-8 col-md-9 col-lg-12">
+                                                        <div class="tile-text">
+                                                            {{ $product->name}}
+                                                            <small>
+                                                                #{{ $product->ref}}
+                                                            </small>
+                                                        </div>
+                                                        <a href="{{ action('AdminProductsController@destroyProduct', [$product->id]) }}" class="pull-right" style="padding-bottom: 10px; padding-right: 20px">
+                                                            <button type="button" class="btn ink-reaction btn-icon-toggle"><i class="glyphicon glyphicon-trash" style="font-size: 14px"></i></button>
+                                                        </a>
+                                                        <a href="{{ action('AdminProductsController@expeditProduct', [$product->id]) }}" style="padding-bottom: 10px; padding-right: 20px" class="pull-right">
+                                                            <button type="button" class="btn ink-reaction btn-icon-toggle"><i class="glyphicon glyphicon-arrow-right" style="font-size: 14px"></i></button>
+                                                        </a>
+                                                    </a>
+                                                </li>
+                                            @endif
+                                        @endforeach
+                                    @endif
+                                </ul>
+                            </div><!--end .col -->
+                        </div><!--end .row -->
+                    </div>
 
-                            <!-- BEGIN SEARCH RESULTS LIST -->
-                            <ul class="list divider-full-bleed">
-                                @if(count($products) < 1)
-                                    AUCUN PRODUIT TROUVÉ
-                                @else
-                                    @foreach( $products as $product )
-                                        <li class="tile">
-                                            <a href="{{ action('AdminProductsController@showProduct', [$product->id]) }}" class="tile-content ink-reaction">
-                                                <div class="tile-icon">
-                                                    <img src="{{ $product->image }}" alt="">
-                                                </div>
+                    <div class="tab-pane" id="expedited">
+                        <div class="row">
+                            <div class="col-sm-8 col-md-9 col-lg-12">
+                                <!-- BEGIN SEARCH RESULTS LIST -->
+                                <ul class="list divider-full-bleed">
+                                    @if(count($products) < 1)
+                                        AUCUN PRODUIT TROUVÉ
+                                    @else
+                                        @foreach( $products as $product )
+                                            @if($product->expedited == 1)
+                                                <li class="tile">
+                                                    <a href="{{ action('AdminProductsController@showProduct', [$product->id]) }}" class="tile-content ink-reaction">
+                                                        <div class="tile-icon">
+                                                            <img src="{{ $product->image }}" alt="">
+                                                        </div>
+                                                        <div class="tile-text">
+                                                            {{ $product->name}}
+                                                            <small>
+                                                                #{{ $product->ref}}
+                                                            </small>
+                                                        </div>
+                                                        <a href="{{ action('AdminProductsController@destroyProduct', [$product->id]) }}" class="pull-right" style="padding-bottom: 10px; padding-right: 20px">
+                                                            <button type="button" class="btn ink-reaction btn-icon-toggle"><i class="glyphicon glyphicon-trash" style="font-size: 14px"></i></button>
+                                                        </a>
+                                                        <a href="{{ action('AdminProductsController@expeditProduct', [$product->id]) }}" style="padding-bottom: 10px; padding-right: 20px" class="pull-right">
+                                                            <button type="button" class="btn ink-reaction btn-icon-toggle"><i class="glyphicon glyphicon-arrow-down" style="font-size: 14px"></i></button>
+                                                        </a>
+                                                        <div></div>
+                                                    </a>
+                                                </li>
+                                            @endif
+                                        @endforeach
+                                    @endif
+                                </ul>
+                            </div><!--end .col -->
+                        </div><!--end .row -->
+                    </div>
 
-                                                <div class="tile-text">
-                                                    {{ $product->name}}
-                                                    <small>
-                                                        @if($product->online == 1)
-                                                            <i style="padding-right: 20px; font-size: 20px" class="md md-public pull-right"></i>
-                                                        @endif
-                                                    </small>
-
-                                                    <small>
-                                                        #{{ $product->ref}}
-                                                    </small>
-                                                </div>
-
-                                            </a>
-                                        </li>
-                                    @endforeach
-                                @endif
-                            </ul>
-
-                        </div><!--end .col -->
-                    </div><!--end .row -->
-                        </div>
                 </div><!--end .card-body -->
                 <!-- END SEARCH RESULTS -->
 

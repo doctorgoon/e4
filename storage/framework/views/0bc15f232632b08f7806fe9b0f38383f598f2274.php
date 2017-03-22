@@ -174,7 +174,7 @@
                                 <a class="btn btn-flat" href="<?php echo e(action('AdminClientsController@clients')); ?>">Retour</a>
                             <?php endif; ?>
 
-                            <?php echo Form::submit($submitButtonText, ['class' => 'btn btn-flat btn-info ink-reaction']); ?>
+                            <?php echo Form::submit($submitButtonText, ['class' => 'btn btn-info ink-reaction']); ?>
 
                         </div><!--end .card-actionbar-row -->
                     </div><!--end .card-actionbar -->
