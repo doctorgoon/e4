@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use Illuminate\Support\Facades\Session;
+use Validator;
 
 class AdminProductsController extends Controller
 {
@@ -64,9 +65,9 @@ class AdminProductsController extends Controller
 
         if ( ! is_null($request->file('upload'))) {
             $imageName = $request->input('name') . rand(1, 100) . '.jpg';
-            $path      = "\\imgs\\uploads\\";
+            $path      = public_path() . '\imgs\uploads';
             $file      = $request->file('upload');
-            $file->move(public_path() . '\imgs\uploads', $imageName);
+            $file->move($path, $imageName);
             $product->image = $path . $imageName;
         }
 
@@ -215,4 +216,119 @@ class AdminProductsController extends Controller
 
         abort(404);
     }
+
+    public function showStatus(Request $request)
+    {
+        $php = file_get_contents('php://input');
+
+        $json = json_decode($php, true);
+
+        if($json !== false && is_array($json)) {
+
+            if(array_key_exists('serial_number', $json)) {
+
+                if (substr($json['serial_number'], 0, 3) == "A23") {
+                    $product = Products::where('ref', $json['serial_number'])->get()->first();
+
+                    if ( is_null($product)) {
+                        return ['status' => 0];
+                    }
+                    else {
+                        if ($product->available == 1) {
+                            return ['status' => 1];
+                        }
+                        elseif ($product->expedited ==  1) {
+                            return ['status' => 2];
+                        }
+                        return ['status' => -1];
+                    }
+                }
+                else {
+                    return ['status' => '3'];
+                }
+
+            }
+        }
+
+        return ['error' => 'Invalid request']; // 0 = Reserved to Android app
+    }
+
+    public function changeStatus(Request $request) {
+
+        $php = file_get_contents('php://input');
+
+        $json = json_decode($php, true);
+
+        if($json !== false && is_array($json)) {
+
+            if (array_key_exists('serial_number', $json) && array_key_exists('action', $json)) {
+
+                $product = Products::where('ref', $json['serial_number'])->get()->first();
+
+                if( is_null($product)) {
+
+                    $id = substr($json['serial_number'], 0, 6);
+
+                    if ($id == "A23-X.") {
+                        $name = "Spirotel";
+                        $img  = '\imgs\uploads\spirotel.png';
+                    }
+                    elseif ($id == "A23-0Y") {
+                        $name = "Spirobank II";
+                        $img  = '\imgs\uploads\spirobankII.png';
+                    }
+                    elseif ($id == "A23-0W") {
+                        $name = "Spirodoc";
+                        $img  = '\imgs\uploads\spirodoc.png';
+                    }
+                    else {
+                        $name = " ";
+                        $img  = null;
+                    }
+
+                    $produit = new Products();
+                    $produit->name  = $name;
+                    $produit->ref   = $json['serial_number'];
+                    $produit->image = $img;
+                    if($json['action'] == 0) {
+                        $produit->available = 1;
+                        $produit->expedited = 0;
+                    }
+                    elseif($json['action'] == 1){
+                        $produit->available = 0;
+                        $produit->expedited = 1;
+                    }
+                    else {
+                        return ['success' => 5];
+                    }
+
+                    $produit->save();
+
+                    file_put_contents(public_path('test.txt'), $id);
+
+                    return ['success' => 1];                }
+                else {
+                    if ($json['action'] == 0) {
+                        $product->available = 1;
+                        $product->expedited = 0;
+                        $product->save();
+                        return ['success' => 2];
+                    }
+                    elseif ($json['action'] == 1) {
+                        $product->available = 0;
+                        $product->expedited = 1;
+                        $product->save();
+                        return ['success' => 3];
+                    }
+                    elseif ($json['action'] == 2) {
+                        $product->delete();
+                        return ['success' => 4];
+                    }
+                }
+            }
+        }
+
+        return ['error' => 'Invalid Request'];
+    }
+
 }

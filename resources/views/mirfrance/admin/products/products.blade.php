@@ -69,12 +69,12 @@
                                                                 #{{ $product->ref}}
                                                             </small>
                                                         </div>
-                                                        <a href="{{ action('AdminProductsController@destroyProduct', [$product->id]) }}" class="pull-right" style="padding-bottom: 10px; padding-right: 20px">
-                                                            <button type="button" class="btn ink-reaction btn-icon-toggle"><i class="glyphicon glyphicon-trash" style="font-size: 14px"></i></button>
-                                                        </a>
-                                                        <a href="{{ action('AdminProductsController@expeditProduct', [$product->id]) }}" style="padding-bottom: 10px; padding-right: 20px" class="pull-right">
-                                                            <button type="button" class="btn ink-reaction btn-icon-toggle"><i class="glyphicon glyphicon-arrow-right" style="font-size: 14px"></i></button>
-                                                        </a>
+                                                    </a>
+                                                    <a href="{{ action('AdminProductsController@destroyProduct', [$product->id]) }}" class="pull-right" style="padding-bottom: 10px; padding-right: 20px">
+                                                        <button type="button" class="btn ink-reaction btn-icon-toggle"><i class="glyphicon glyphicon-trash" style="font-size: 14px"></i></button>
+                                                    </a>
+                                                    <a href="{{ action('AdminProductsController@expeditProduct', [$product->id]) }}" style="padding-bottom: 10px; padding-right: 20px" class="pull-right">
+                                                        <button type="button" class="btn ink-reaction btn-icon-toggle"><i class="glyphicon glyphicon-arrow-right" style="font-size: 14px"></i></button>
                                                     </a>
                                                 </li>
                                             @endif
@@ -106,6 +106,7 @@
                                                                 #{{ $product->ref}}
                                                             </small>
                                                         </div>
+                                                    </a>
                                                         <a href="{{ action('AdminProductsController@destroyProduct', [$product->id]) }}" class="pull-right" style="padding-bottom: 10px; padding-right: 20px">
                                                             <button type="button" class="btn ink-reaction btn-icon-toggle"><i class="glyphicon glyphicon-trash" style="font-size: 14px"></i></button>
                                                         </a>
@@ -113,7 +114,7 @@
                                                             <button type="button" class="btn ink-reaction btn-icon-toggle"><i class="glyphicon glyphicon-arrow-down" style="font-size: 14px"></i></button>
                                                         </a>
                                                         <div></div>
-                                                    </a>
+
                                                 </li>
                                             @endif
                                         @endforeach

@@ -18,5 +18,7 @@ class VerifyCsrfToken extends BaseVerifier
         '/administration/formules/licences-pneumopharma/rechercher',
         '/administration/formules/licences-pneumopharma/cle-activation',
         '/administration/clients/rechercher-client/customer-service',
+        '/app/get',
+        '/app/set'
     ];
 }
