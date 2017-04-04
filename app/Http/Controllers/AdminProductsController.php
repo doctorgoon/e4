@@ -22,6 +22,9 @@ class AdminProductsController extends Controller
     {
         $search = $request->input('contactSearch');
 
+        $countAvailable = Products::where('available', 1)->count();
+        $countExpedited = Products::where('expedited', 1)->count();
+
         if(is_null($search)) {
             $products = Products::all()->sortBy('created_at');
         }
@@ -30,7 +33,7 @@ class AdminProductsController extends Controller
                 ->orWhere('ref','like','%'.$search.'%')->orderBy('created_at')->get();
         }
 
-        return view('mirfrance.admin.products.products', compact('products'));
+        return view('mirfrance.admin.products.products', compact('products', 'countAvailable', 'countExpedited'));
     }
 
     /**
@@ -290,23 +293,25 @@ class AdminProductsController extends Controller
                     $produit->name  = $name;
                     $produit->ref   = $json['serial_number'];
                     $produit->image = $img;
+
                     if($json['action'] == 0) {
                         $produit->available = 1;
                         $produit->expedited = 0;
+                        $produit->save();
+
+                        return ['success' => 2];
                     }
                     elseif($json['action'] == 1){
                         $produit->available = 0;
                         $produit->expedited = 1;
+                        $produit->save();
+
+                        return ['success' => 3];
                     }
                     else {
                         return ['success' => 5];
                     }
-
-                    $produit->save();
-
-                    file_put_contents(public_path('test.txt'), $id);
-
-                    return ['success' => 1];                }
+                }
                 else {
                     if ($json['action'] == 0) {
                         $product->available = 1;

@@ -11,7 +11,7 @@
 |
 */
 
-Route::group(['middleware' => ['web']], function() {
+Route::group(['middleware' => ['admin']], function() {
 
 // TABLEAU DE BORD
     Route::get('/administration/tableau-de-bord', 'AdminController@dashboard');
@@ -32,6 +32,7 @@ Route::group(['middleware' => ['web']], function() {
     Route::get('/administration/mes-notes/modifier-la-note/{id}', 'AdminController@editANote');
     Route::post('/administration/mes-notes/modifier-la-note/{id}', 'AdminController@postEditANote');
     Route::get('/administration/mes-notes/finir-la-note/{id}', 'AdminController@finishNote');
+    Route::get('/administration/mes-notes/finir-la-note/{id}', 'AdminController@finishNoteDash');
     Route::get('/administration/mes-notes/supprimer-la-note/{id}', 'AdminController@deleteANote');
     Route::post('/administration/mes-notes/supprimer-la-note/{id}', 'AdminController@postDeleteANote');
     Route::get('/administration/mes-notes', 'AdminController@myNotes');
@@ -49,6 +50,7 @@ Route::group(['middleware' => ['web']], function() {
     Route::get('/administration/appels', 'AdminCallsController@calls');
     Route::get('/administration/mes-appels', 'AdminCallsController@myCalls');
     Route::get('/administration/appels/nouveau', 'AdminCallsController@addCall');
+    Route::get('/administration/appels-client/{id}/nouveau', 'AdminCallsController@addClientCall');
     Route::get('/administration/appels/{id}', 'AdminCallsController@showCall');
     Route::post('/administration/appels/nouveau', 'AdminCallsController@postAddCall');
     Route::get('/administration/appels/{id}/modifier', 'AdminCallsController@editCall');

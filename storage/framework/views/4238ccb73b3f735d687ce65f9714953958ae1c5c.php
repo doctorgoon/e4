@@ -10,6 +10,12 @@
                         </a>
                         &nbsp Appel de <?php echo e($call->client_name); ?> &nbsp-&nbsp <?php echo e(get_french_date($call->created_at)); ?>
 
+                    <?php elseif(isset($client)): ?>
+                        <a href="<?php echo e(action('AdminClientsController@showClient', [$client->id])); ?>" class="btn btn-icon">
+                            <i class="glyphicon glyphicon-arrow-left" style="display: inline; font-size: 18px; line-height: 0px;"></i>
+                        </a>
+                        &nbsp Appel de <?php echo e($client->firstname); ?> <?php echo e($client->lastname); ?>
+
                     <?php else: ?>
                         <a href="<?php echo e(action('AdminCallsController@calls')); ?>" class="btn btn-icon">
                             <i class="glyphicon glyphicon-arrow-left" style="display: inline; font-size: 18px; line-height: 0px;"></i>
@@ -38,8 +44,13 @@
                                 <div class="form-group">
                                     <?php echo Form::label('client_name', 'Nom du client : '); ?>
 
-                                    <?php echo Form::text('client_name', null, ['class' => 'form-control', 'autocomplete' => 'off']); ?>
+                                    <?php if(isset($client)): ?>
+                                        <?php echo Form::text('client_name', $client->firstname . " " . $client->lastname, ['class' => 'form-control', 'autocomplete' => 'off']); ?>
 
+                                    <?php else: ?>
+                                        <?php echo Form::text('client_name', null, ['class' => 'form-control', 'autocomplete' => 'off']); ?>
+
+                                    <?php endif; ?>
                                 </div>
                             </div>
                         </div>
@@ -49,8 +60,13 @@
                                 <div class="form-group">
                                     <?php echo Form::label('company', 'Nom de l\'entreprise : '); ?>
 
-                                    <?php echo Form::text('company', null, ['class' => 'form-control', 'autocomplete' => 'off']); ?>
+                                    <?php if(!is_null($client->company)): ?>
+                                        <?php echo Form::text('company', $client->company, ['class' => 'form-control', 'autocomplete' => 'off']); ?>
 
+                                    <?php else: ?>
+                                        <?php echo Form::text('company', null, ['class' => 'form-control', 'autocomplete' => 'off']); ?>
+
+                                    <?php endif; ?>
                                 </div>
                             </div>
 
@@ -58,8 +74,13 @@
                                 <div class="form-group">
                                     <?php echo Form::label('email', 'E-mail : '); ?>
 
-                                    <?php echo Form::text('email', null, ['class' => 'form-control', 'autocomplete' => 'off']); ?>
+                                    <?php if(!is_null($client->email)): ?>
+                                        <?php echo Form::text('email', $client->email, ['class' => 'form-control', 'autocomplete' => 'off']); ?>
 
+                                    <?php else: ?>
+                                        <?php echo Form::text('email', null, ['class' => 'form-control', 'autocomplete' => 'off']); ?>
+
+                                    <?php endif; ?>
                                 </div>
                             </div>
                         </div>
@@ -69,8 +90,13 @@
                                 <div class="form-group">
                                     <?php echo Form::label('phone', 'Numéro de téléphone : '); ?>
 
-                                    <?php echo Form::text('phone', null, ['class' => 'form-control', 'autocomplete' => 'off']); ?>
+                                    <?php if(!is_null($client->phone)): ?>
+                                        <?php echo Form::text('phone', $client->phone, ['class' => 'form-control', 'autocomplete' => 'off']); ?>
 
+                                    <?php else: ?>
+                                        <?php echo Form::text('phone', null, ['class' => 'form-control', 'autocomplete' => 'off']); ?>
+
+                                    <?php endif; ?>
                                 </div>
                             </div>
 
@@ -78,8 +104,13 @@
                                 <div class="form-group">
                                     <?php echo Form::label('mobile', 'Numéro de mobile : '); ?>
 
-                                    <?php echo Form::text('mobile', null, ['class' => 'form-control', 'autocomplete' => 'off']); ?>
+                                    <?php if(!is_null($client->mobile)): ?>
+                                        <?php echo Form::text('mobile', $client->mobile, ['class' => 'form-control', 'autocomplete' => 'off']); ?>
 
+                                    <?php else: ?>
+                                        <?php echo Form::text('mobile', null, ['class' => 'form-control', 'autocomplete' => 'off']); ?>
+
+                                    <?php endif; ?>
                                 </div>
                             </div>
                         </div>

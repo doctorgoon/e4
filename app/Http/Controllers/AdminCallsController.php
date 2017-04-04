@@ -92,6 +92,14 @@ class AdminCallsController extends Controller
         return view('mirfrance.admin.calls.add-call');
     }
 
+    /* add new Call with client linked to database */
+    public function addClientCall($id)
+    {
+        $client = Clients::find($id);
+
+        return view('mirfrance.admin.calls.add-call', compact('client'));
+    }
+
     /* add new Call to database */
     public function postAddCall(Request $request)
     {

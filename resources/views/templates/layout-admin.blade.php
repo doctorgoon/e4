@@ -41,7 +41,7 @@
             <ul class="header-nav header-nav-options">
                 <li class="header-nav-brand" >
                     <div class="brand-holder">
-                        <a href="/administration">
+                        <a href="/administration/tableau-de-bord">
                             <span class="text-lg text-bold text-primary">Administration</span>
                         </a>
                     </div>
@@ -149,7 +149,7 @@
                 </a>
             </div>
             <div class="expanded">
-                <a href="">
+                <a href="/administration/tableau-de-bord">
                     <span class="text-lg text-bold text-primary ">ADMIN</span>
                 </a>
             </div>
@@ -160,7 +160,7 @@
             <ul id="main-menu" class="gui-controls">
                 <!-- BEGIN DASHBOARD -->
                 <li class="gui-folder">
-                    <a class="" href="#home">
+                    <a class="" href="/administration/tableau-de-bord">
                         <div class="gui-icon"><i class="md md-home"></i></div>
                         <span class="title">Tableau de bord</span>
                     </a>

@@ -9,7 +9,7 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <br/>
-                        <span class="text-lg text-bold text-primary">Administration MIR France / Lamirau </span>
+                        <span class="text-lg text-bold text-primary">Portail d'administration</span>
                         <br/><br/>
                         {!! Form::open(['class' => 'form']) !!}
 

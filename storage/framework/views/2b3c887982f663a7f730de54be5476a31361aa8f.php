@@ -5,7 +5,7 @@
     <section>
         <div class="section-header">
             <ol class="breadcrumb">
-                <li class="active"><h2>Produit</h2></li>
+                <li class="active"><h2>Produits</h2></li>
             </ol>
         </div>
 
@@ -42,8 +42,8 @@
 
                     <div class="card-head">
                         <ul class="nav nav-tabs" data-toggle="tabs">
-                            <li class="active"><a href="#available">Disponibles</a></li>
-                            <li><a href="#expedited">Expédiés</a></li>
+                            <li class="active"><a href="#available">Disponibles / <?php echo e($countAvailable); ?></a></li>
+                            <li><a href="#expedited">Expédiés / <?php echo e($countExpedited); ?></a></li>
                         </ul>
                     </div>
 

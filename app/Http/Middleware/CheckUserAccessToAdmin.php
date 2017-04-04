@@ -51,7 +51,7 @@ class CheckUserAccessToAdmin
      */
     public function handle($request, Closure $next)
     {
-        // We force the https connection in production mode
+        /*// We force the https connection in production mode
         if (env('APP_ENV') != 'local') {
             URL::forceSchema('https');
         }
@@ -66,7 +66,7 @@ class CheckUserAccessToAdmin
             }
         } else {
             abort(403);
-        }
+        }*/
 
         if ($request->route()->uri() != 'administration') {
 
@@ -83,82 +83,14 @@ class CheckUserAccessToAdmin
                     $user->last_access = Carbon::now();
                     $user->save();
 
-
-                    // We check if the user has an access to the controller
-                    $hasPermission = AdminAccess::where([
-                        'user_id' => $user->id,
-                        'controller' => $controller[0]
-                    ])->get()->first();
-
                     Session::put('user_firstname', $user->firstname);
                     Session::put('user_lastname', $user->lastname);
                     Session::put('user_id', $user->id);
                     Session::put('user_picture', $user->picture);
 
-                    // How notes in waiting there are ?
+                    // How many notes in waiting is there ?
                     $notes = UsersNotes::where('user_id', $user->id)->where('progress', '<>', 100)->count();
                     Session::put('user_notes_count', $notes);
-
-
-                    if (!is_null($hasPermission)) {
-                        // Access granted !
-                        $userAccessList = [];
-                        $userAccess = AdminAccess::where('user_id', $user->id)->get();
-                        foreach ($userAccess as $access) {
-                            $userAccessList[] = $access->controller;
-                        }
-
-                        $this->view->share('userAccessList', $userAccessList);
-
-                        $this->view->share('access', [
-                            'AdminController' => 'Accès à l\'administration',
-                            'AdminToolsController' => 'Gérer les droits d\'accès',
-                            'AdminCallsController' => 'Gérer les appels',
-                            'AdminClientsController' => 'Gérer les clients',
-                            'AdminPlansController' => 'Gérer les formules',
-                            'AdminProductsController' => 'Gérer les produits en ligne sur MIR France',
-                            'AdminPagesController' => 'Gérer les pages des sites',
-                            'AdminProjectsController' => 'Gérer les projets (gsk, asalee...)',
-                            'AdminCustomerServiceController' => 'Gérer le SAV',
-                            'AdminArticlesController' => 'Gérer les publications d\'articles',
-                        ]);
-
-                        $this->view->share('calls_status', [
-                            0 => 'Non traité',
-                            1 => 'Traité',
-                            2 => 'A rappeler',
-                            3 => 'Attente de rappel',
-                        ]);
-
-                        $this->view->share('colors_status', [
-                            0 => 'danger',
-                            1 => 'success',
-                            2 => 'warning',
-                            3 => 'info',
-                        ]);
-
-                        $this->view->share('categorie_id', [
-                            0 => 'Spiromètres sur table',
-                            1 => 'Spiromètres compact',
-                            2 => 'Spiromètres USB',
-                            3 => 'Télémédecine',
-                            4 => 'Oxymètres',
-                            5 => 'Logiciels',
-                            6 => 'Accessoires',
-                            7 => 'Consommables',
-                        ]);
-
-                        $this->view->share('site', [
-                            0 => 'mirfrance',
-                            1 => 'lamirau',
-                            2 => 'spirometrie',
-                            3 => 'pneumotel',
-                        ]);
-
-                    } else {
-                        // No ! 403 error
-                        abort(403);
-                    }
 
 
                     // Get all users in the db

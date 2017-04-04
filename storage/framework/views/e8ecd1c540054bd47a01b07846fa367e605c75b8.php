@@ -49,7 +49,7 @@
 
                             <!-- BEGIN SEARCH RESULTS LIST -->
                             <div class="margin-bottom-xxl">
-                                <span class="text-light text-lg"><strong>&nbsp;</strong></span>
+                                <span class="text-light text-lg"><strong><?php echo e($clients->count()); ?> client(s)</strong></span>
                                 <div class="btn-group btn-group-sm pull-right">
                                     <button type="button" class="btn btn-default-light dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                                         <span class="glyphicon glyphicon-arrow-down"></span> Sort

@@ -9,6 +9,11 @@
                             <i class="glyphicon glyphicon-arrow-left" style="display: inline; font-size: 18px; line-height: 0px;"></i>
                         </a>
                         &nbsp Appel de {{$call->client_name}} &nbsp-&nbsp {{get_french_date($call->created_at)}}
+                    @elseif(isset($client))
+                        <a href="{{ action('AdminClientsController@showClient', [$client->id]) }}" class="btn btn-icon">
+                            <i class="glyphicon glyphicon-arrow-left" style="display: inline; font-size: 18px; line-height: 0px;"></i>
+                        </a>
+                        &nbsp Appel de {{$client->firstname}} {{$client->lastname}}
                     @else
                         <a href="{{ action('AdminCallsController@calls') }}" class="btn btn-icon">
                             <i class="glyphicon glyphicon-arrow-left" style="display: inline; font-size: 18px; line-height: 0px;"></i>
@@ -33,7 +38,11 @@
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     {!! Form::label('client_name', 'Nom du client : ') !!}
-                                    {!! Form::text('client_name', null, ['class' => 'form-control', 'autocomplete' => 'off']) !!}
+                                    @if(isset($client))
+                                        {!! Form::text('client_name', $client->firstname . " " . $client->lastname, ['class' => 'form-control', 'autocomplete' => 'off']) !!}
+                                    @else
+                                        {!! Form::text('client_name', null, ['class' => 'form-control', 'autocomplete' => 'off']) !!}
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -42,14 +51,22 @@
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     {!! Form::label('company', 'Nom de l\'entreprise : ') !!}
-                                    {!! Form::text('company', null, ['class' => 'form-control', 'autocomplete' => 'off']) !!}
+                                    @if(!is_null($client->company))
+                                        {!! Form::text('company', $client->company, ['class' => 'form-control', 'autocomplete' => 'off']) !!}
+                                    @else
+                                        {!! Form::text('company', null, ['class' => 'form-control', 'autocomplete' => 'off']) !!}
+                                    @endif
                                 </div>
                             </div>
 
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     {!! Form::label('email', 'E-mail : ') !!}
-                                    {!! Form::text('email', null, ['class' => 'form-control', 'autocomplete' => 'off']) !!}
+                                    @if(!is_null($client->email))
+                                        {!! Form::text('email', $client->email, ['class' => 'form-control', 'autocomplete' => 'off']) !!}
+                                    @else
+                                        {!! Form::text('email', null, ['class' => 'form-control', 'autocomplete' => 'off']) !!}
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -58,14 +75,22 @@
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     {!! Form::label('phone', 'Numéro de téléphone : ') !!}
-                                    {!! Form::text('phone', null, ['class' => 'form-control', 'autocomplete' => 'off']) !!}
+                                    @if(!is_null($client->phone))
+                                        {!! Form::text('phone', $client->phone, ['class' => 'form-control', 'autocomplete' => 'off']) !!}
+                                    @else
+                                        {!! Form::text('phone', null, ['class' => 'form-control', 'autocomplete' => 'off']) !!}
+                                    @endif
                                 </div>
                             </div>
 
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     {!! Form::label('mobile', 'Numéro de mobile : ') !!}
-                                    {!! Form::text('mobile', null, ['class' => 'form-control', 'autocomplete' => 'off']) !!}
+                                    @if(!is_null($client->mobile))
+                                        {!! Form::text('mobile', $client->mobile, ['class' => 'form-control', 'autocomplete' => 'off']) !!}
+                                    @else
+                                        {!! Form::text('mobile', null, ['class' => 'form-control', 'autocomplete' => 'off']) !!}
+                                    @endif
                                 </div>
                             </div>
                         </div>

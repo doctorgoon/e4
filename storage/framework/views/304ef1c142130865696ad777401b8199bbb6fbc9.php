@@ -150,7 +150,7 @@
                                                 </div>
                                             </div>
                                         <?php endforeach; ?>
-                                            <a href="<?php echo e(action('AdminCallsController@addCall', [$client->id])); ?>" class="btn ink-reaction btn-info">Ajouter un appel</a>
+                                            <a href="<?php echo e(action('AdminCallsController@addClientCall', [$client->id])); ?>" class="btn ink-reaction btn-info">Ajouter un appel</a>
                                     </div>
                                 </div>
                             </div><!--end .tab-pane-->

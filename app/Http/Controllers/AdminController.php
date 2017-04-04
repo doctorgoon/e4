@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\AdminUsers;
+use App\Calls;
+use App\Clients;
+use App\Products;
 use App\UsersNotes;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -23,7 +26,7 @@ class AdminController extends Controller
      */
     public function loginUser()
     {
-        /*if (Session::has('email') && Session::has('token')) {
+        if (Session::has('email') && Session::has('token')) {
             $user = AdminUsers::where([
                 'email' => Session::get('email'),
                 'token' => Session::get('token'),
@@ -33,7 +36,7 @@ class AdminController extends Controller
             if ( ! is_null($user)) {
                 return redirect(action('AdminController@dashboard'));
             }
-        }*/
+        }
 
         return view('mirfrance.admin.login-user');
     }
@@ -100,7 +103,34 @@ class AdminController extends Controller
 
     public function dashboard()
     {
-        return view('mirfrance.admin.dashboard');
+        // calls
+        $calls = Calls::where('status', 0)->count();
+        $totalCalls = Calls::all()->count();
+
+        $callsPercent = round(($calls * 100) / $totalCalls, 2);
+
+        if($callsPercent <= 25) {
+            $callsColor = "success";
+        }
+        elseif ($callsPercent > 25 && $callsPercent < 50) {
+            $callsColor = "warning";
+        }
+        else {
+            $callsColor = "danger";
+        }
+
+        // notes
+        $myNotes = UsersNotes::where('user_id', Session::get('user_id'))->orderBy('progress', 'asc')->limit(50)->get();
+
+        // clients
+        $clients = Clients::all()->count();
+
+        // products
+        $productsAvailable = Products::where('available', 1)->count();
+        $productsExpedited = Products::where('expedited', 1)->count();
+
+        return view('mirfrance.admin.dashboard', compact('calls', 'totalCalls', 'callsPercent',
+            'callsColor', 'myNotes', 'clients', 'productsAvailable', 'productsExpedited'));
     }
 
     public function myProfile()
@@ -201,6 +231,22 @@ class AdminController extends Controller
             $note->save();
 
             return redirect(action('AdminController@myNotes'));
+        }
+
+        abort(404);
+    }
+
+    public function finishNoteDash($id)
+    {
+        $note = UsersNotes::find($id);
+
+        if ( ! is_null($id)) {
+
+            $note->progress   = 100;
+            $note->updated_at = Carbon::now();
+            $note->save();
+
+            return redirect(action('AdminController@dashboard'));
         }
 
         abort(404);
