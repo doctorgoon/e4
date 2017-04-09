@@ -12,12 +12,12 @@
                         <?php if(get_total_duration($call) > 0): ?> &nbsp - &nbsp Durée totale : <?php echo e(substr(get_total_duration($call), 2)); ?> <?php endif; ?>
 
                         <?php if( ! is_null($call->client_id)): ?>
-                            <a href="<?php echo e(action('AdminClientsController@showClient', [$call->client_id])); ?>" style="padding-top: 12px; padding-right: 30px" class="btn btn-icon pull-right">
+                            <a href="<?php echo e(action('ClientsController@showClient', [$call->client_id])); ?>" style="padding-top: 12px; padding-right: 30px" class="btn btn-icon pull-right">
                             <i class="glyphicon glyphicon-user" style="display: inline; font-size: 30px; line-height: 0px;"></i></a>
                         <?php endif; ?>
 
 
-                        <a href="<?php echo e(action('AdminCallsController@calls')); ?>" style="padding-top: 12px; padding-right: 30px" class="btn btn-icon pull-right">
+                        <a href="<?php echo e(action('CallsController@calls')); ?>" style="padding-top: 12px; padding-right: 30px" class="btn btn-icon pull-right">
                         <i class="glyphicon glyphicon-earphone" style="display: inline; font-size: 30px; line-height: 0px;"></i>
                         </a>
                     </h3>
@@ -82,7 +82,7 @@
                                             <div class="tile-content">
                                                 <div class="tile-text">
                                                     <i><?php echo e(get_french_date($ticket->updated_at)); ?> &nbsp - &nbsp <?php echo e($ticket->duration); ?> <?php echo e(str_plural('minute', $ticket->duration)); ?> </i> &nbsp
-                                                    <a href="<?php echo e(action('AdminCallsController@editTicket', [$ticket->id])); ?>" class="btn-icon">
+                                                    <a href="<?php echo e(action('CallsController@editTicket', [$ticket->id])); ?>" class="btn-icon">
                                                         <i class="glyphicon glyphicon-pencil"></i>
                                                     </a>
                                                         <small>
@@ -103,16 +103,16 @@
                     <br />
                     <div class="row">
 
-                        <a href="<?php echo e(action('AdminCallsController@addTicket', [$call->id])); ?>" class="btn ink-reaction btn-<?php echo e(Config::get('call_status.' . $call->status)); ?>">Ajouter un ticket</a>
+                        <a href="<?php echo e(action('CallsController@addTicket', [$call->id])); ?>" class="btn ink-reaction btn-<?php echo e(Config::get('call_status.' . $call->status)); ?>">Ajouter un ticket</a>
 
-                        <a href="<?php echo e(action('AdminCallsController@editCall', [$call->id])); ?>" class="btn ink-reaction btn-<?php echo e(Config::get('call_status.' . $call->status)); ?>">Modifier l'appel</a>
+                        <a href="<?php echo e(action('CallsController@editCall', [$call->id])); ?>" class="btn ink-reaction btn-<?php echo e(Config::get('call_status.' . $call->status)); ?>">Modifier l'appel</a>
 
-                        <a href="<?php echo e(action('AdminCallsController@setStatus', [$call->id])); ?>" class="btn ink-reaction btn-<?php echo e(Config::get('call_status.' . $call->status)); ?>">Modifier le statut de l'appel</a>
+                        <a href="<?php echo e(action('CallsController@setStatus', [$call->id])); ?>" class="btn ink-reaction btn-<?php echo e(Config::get('call_status.' . $call->status)); ?>">Modifier le statut de l'appel</a>
 
                         <?php if(empty($call->client_id)): ?>
-                            <a href="<?php echo e(action('AdminCallsController@pairCall', [$call->id])); ?>" class="btn ink-reaction btn-<?php echo e(Config::get('call_status.' . $call->status)); ?>">Associer à un client</a>
+                            <a href="<?php echo e(action('CallsController@pairCall', [$call->id])); ?>" class="btn ink-reaction btn-<?php echo e(Config::get('call_status.' . $call->status)); ?>">Associer à un client</a>
                         <?php else: ?>
-                            <a href="<?php echo e(action('AdminCallsController@pairCall', [$call->id])); ?>" class="btn ink-reaction btn-<?php echo e(Config::get('call_status.' . $call->status)); ?>">Modifier le client associé</a>
+                            <a href="<?php echo e(action('CallsController@pairCall', [$call->id])); ?>" class="btn ink-reaction btn-<?php echo e(Config::get('call_status.' . $call->status)); ?>">Modifier le client associé</a>
                         <?php endif; ?>
 
                     </div>

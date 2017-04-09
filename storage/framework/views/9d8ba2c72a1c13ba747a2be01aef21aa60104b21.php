@@ -13,7 +13,7 @@
 
                     <?php echo Form::submit('Supprimer', ['class' => 'btn btn-info btn']); ?>
 
-                    <?php echo Form::button('Annuler', ['class' => 'btn btn-info btn-flat', 'onclick' => 'document.location.href=\'' . action('AdminProductsController@products') . '\'']); ?>
+                    <?php echo Form::button('Annuler', ['class' => 'btn btn-info btn-flat', 'onclick' => 'document.location.href=\'' . action('ProductsController@products') . '\'']); ?>
 
                     <?php echo Form::close(); ?>
 

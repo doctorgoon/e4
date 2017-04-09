@@ -23,7 +23,6 @@ class CheckUserAccessToAdmin
      */
     protected $view;
 
-
     /**
      * Create a new error binder instance.
      *
@@ -34,10 +33,8 @@ class CheckUserAccessToAdmin
         $this->view = $view;
     }
 
-
     /**
-     * @author  Cyril BESSEYRE
-     * @last    2016-05-08
+     * @author  Jeremy AVID
      *
      * Handle an incoming request.
      * This middleware is called when an user is on the administration
@@ -51,23 +48,6 @@ class CheckUserAccessToAdmin
      */
     public function handle($request, Closure $next)
     {
-        /*// We force the https connection in production mode
-        if (env('APP_ENV') != 'local') {
-            URL::forceSchema('https');
-        }
-
-        // We get the current action name and extract only the controllerName
-        $actionAndController = str_replace('App\Http\Controllers\\', '', $request->route()->getActionName());
-
-        if (preg_match('#@#', $actionAndController)) {
-            $controller = explode('@', $actionAndController);
-            if (count($controller) != 2) {
-                abort(403);
-            }
-        } else {
-            abort(403);
-        }*/
-
         if ($request->route()->uri() != 'administration') {
 
             // We check if the user is connected
@@ -116,6 +96,7 @@ class CheckUserAccessToAdmin
             }
         } else {
             // Login page
+            return redirect(action('AdminController@loginUser'));
         }
 
         return $next($request);

@@ -175,8 +175,8 @@
                         </a>
                         <ul>
                             <li class="">
-                                <a href="<?php echo e(action('AdminCallsController@calls')); ?>"><span class="title">Tous les appels</span></a>
-                                <a href="<?php echo e(action('AdminCallsController@myCalls')); ?>"><span class="title">Mes appels</span></a>
+                                <a href="<?php echo e(action('CallsController@calls')); ?>"><span class="title">Tous les appels</span></a>
+                                <a href="<?php echo e(action('CallsController@myCalls')); ?>"><span class="title">Mes appels</span></a>
                             </li>
                         </ul>
                     </li>
@@ -188,7 +188,7 @@
                         </a>
                         <ul>
                             <li class="">
-                                <a href="<?php echo e(action('AdminToolsController@users')); ?>"><span class="title">Utilisateurs</span></a>
+                                <a href="<?php echo e(action('AdminUsersController@users')); ?>"><span class="title">Utilisateurs</span></a>
                             </li>
                         </ul>
                     </li>
@@ -200,7 +200,7 @@
                         </a>
                         <ul>
                             <li class="">
-                                <a href="<?php echo e(action('AdminClientsController@clients')); ?>"><span class="title">Suivi des clients</span></a>
+                                <a href="<?php echo e(action('ClientsController@clients')); ?>"><span class="title">Suivi des clients</span></a>
                             </li>
                         </ul>
                     </li>
@@ -212,7 +212,7 @@
                         </a>
                         <ul>
                             <li class="">
-                                <a href="<?php echo e(action('AdminProductsController@products')); ?>"><span class="title">Gérer les produits</span></a>
+                                <a href="<?php echo e(action('ProductsController@products')); ?>"><span class="title">Gérer les produits</span></a>
                             </li>
                         </ul>
                     </li>

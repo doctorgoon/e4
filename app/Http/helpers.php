@@ -1,5 +1,6 @@
 <?php
 use App\AdminUsers;
+use App\Products;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Session;
 use \Ovh\Api;
@@ -30,8 +31,17 @@ function getUsersById()
     foreach ($u as $user) {
         $users[$user->id] = $user->firstname . ' ' . $user->lastname;
     }
-
     return $users;
+}
+
+function getSpirometersLits() {
+
+    $spiros = Products::distinct()->get(['name']);
+    $names  = array();
+    foreach($spiros as $spiro) {
+        $names[$spiro->name] = $spiro->name;
+    }
+    return $names;
 }
 
 function findUsersById($id, $param)

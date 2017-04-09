@@ -11,7 +11,7 @@
                     </h3>
                 </div>
                 <div class="card-body">
-                    <?php echo $__env->make('mirfrance.admin.products.form-products', ['submitButtonText' => 'Ajouter'], array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                    <?php echo $__env->make('products.form-products', ['submitButtonText' => 'Ajouter'], array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
                 </div>
             </div>
         </div>

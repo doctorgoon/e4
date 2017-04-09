@@ -38,7 +38,7 @@ class AdminController extends Controller
             }
         }
 
-        return view('mirfrance.admin.login-user');
+        return view('login-user');
     }
 
     /**
@@ -106,8 +106,11 @@ class AdminController extends Controller
         // calls
         $calls = Calls::where('status', 0)->count();
         $totalCalls = Calls::all()->count();
+        $callsPercent = null;
 
-        $callsPercent = round(($calls * 100) / $totalCalls, 2);
+        if($totalCalls > 0) {
+            $callsPercent = round(($calls * 100) / $totalCalls, 2);
+        }
 
         if($callsPercent <= 25) {
             $callsColor = "success";
@@ -129,7 +132,7 @@ class AdminController extends Controller
         $productsAvailable = Products::where('available', 1)->count();
         $productsExpedited = Products::where('expedited', 1)->count();
 
-        return view('mirfrance.admin.dashboard', compact('calls', 'totalCalls', 'callsPercent',
+        return view('dashboard', compact('calls', 'totalCalls', 'callsPercent',
             'callsColor', 'myNotes', 'clients', 'productsAvailable', 'productsExpedited'));
     }
 
@@ -138,7 +141,7 @@ class AdminController extends Controller
         $user = AdminUsers::find(Session::get('user_id'));
 
         if ( ! is_null($user)) {
-            return view('mirfrance.admin.my-profile', compact('user'));
+            return view('my-profile', compact('user'));
         }
 
         return redirect(action('AdminController@dashboard'));
@@ -175,7 +178,7 @@ class AdminController extends Controller
     {
         $myNotes = UsersNotes::where('user_id', Session::get('user_id'))->orderBy('progress', 'asc')->limit(50)->get();
 
-        return view('mirfrance.admin.my-notes', compact('myNotes'));
+        return view('my-notes', compact('myNotes'));
     }
 
     public function readANote($id)
@@ -183,7 +186,7 @@ class AdminController extends Controller
         $myNote = UsersNotes::where('id', $id)->where('user_id', Session::get('user_id'))->limit(1)->get()->first();
 
         if ( ! is_null($myNote)) {
-            return view('mirfrance.admin.read-a-note', compact('myNote'));
+            return view('read-a-note', compact('myNote'));
         }
 
         return redirect(action('AdminController@myNotes'));
@@ -196,7 +199,7 @@ class AdminController extends Controller
             $progress[$i] = $i . ' %';
         }
 
-        return view('mirfrance.admin.add-edit-a-note', compact('progress'));
+        return view('add-edit-a-note', compact('progress'));
     }
 
     public function postAddANote(Request $request)
@@ -261,7 +264,7 @@ class AdminController extends Controller
 
         $note = UsersNotes::where('user_id', Session::get('user_id'))->where('id', $id)->limit(1)->get()->first();
         if ( ! is_null($note)) {
-            return view('mirfrance.admin.add-edit-a-note', compact('progress', 'note'));
+            return view('add-edit-a-note', compact('progress', 'note'));
         }
 
         return redirect(action('AdminController@myNotes'));
@@ -293,7 +296,7 @@ class AdminController extends Controller
         $myNote = UsersNotes::where('id', $id)->where('user_id', Session::get('user_id'))->limit(1)->get()->first();
 
         if ( ! is_null($myNote)) {
-            return view('mirfrance.admin.delete-a-note', compact('myNote'));
+            return view('delete-a-note', compact('myNote'));
         }
     }
 

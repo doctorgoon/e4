@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class AdminUsers extends Model
 {
+    protected $fillable = [
+        'id', 'firstname', 'lastname', 'email', 'password', 'job',
+        'ip', 'token', 'phone', 'last_access'];
 
     public function calls()
     {

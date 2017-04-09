@@ -25,14 +25,14 @@
 
                     </div>
                     <div class="tools pull-left" style="padding: 8px">
-                        <a href="<?php echo e(action('AdminProductsController@products')); ?>">
+                        <a href="<?php echo e(action('ProductsController@products')); ?>">
                             <button type="submit" class="btn btn-icon-toggle ink-reaction">
                                 <i class="fa fa-refresh" style="font-size: 12pt"></i>
                             </button>
                         </a>
                     </div>
                     <div class="tools" style="padding-top: 5px">
-                        <a class="btn btn-floating-action btn-default-light" href="<?php echo e(action('AdminProductsController@addProduct')); ?>"><i class="fa fa-plus"></i></a>
+                        <a class="btn btn-floating-action btn-default-light" href="<?php echo e(action('ProductsController@addProduct')); ?>"><i class="fa fa-plus"></i></a>
                     </div>
                 </div><!--end .card-head -->
                 <!-- END SEARCH HEADER -->
@@ -58,7 +58,7 @@
                                         <?php foreach( $products as $product ): ?>
                                             <?php if($product->expedited != 1): ?>
                                                 <li class="tile">
-                                                    <a href="<?php echo e(action('AdminProductsController@showProduct', [$product->id])); ?>" class="tile-content ink-reaction">
+                                                    <a href="<?php echo e(action('ProductsController@showProduct', [$product->id])); ?>" class="tile-content ink-reaction">
                                                         <div class="tile-icon">
                                                             <img src="<?php echo e($product->image); ?>" alt="">
                                                         </div>
@@ -72,10 +72,10 @@
                                                             </small>
                                                         </div>
                                                     </a>
-                                                    <a href="<?php echo e(action('AdminProductsController@destroyProduct', [$product->id])); ?>" class="pull-right" style="padding-bottom: 10px; padding-right: 20px">
+                                                    <a href="<?php echo e(action('ProductsController@destroyProduct', [$product->id])); ?>" class="pull-right" style="padding-bottom: 10px; padding-right: 20px">
                                                         <button type="button" class="btn ink-reaction btn-icon-toggle"><i class="glyphicon glyphicon-trash" style="font-size: 14px"></i></button>
                                                     </a>
-                                                    <a href="<?php echo e(action('AdminProductsController@expeditProduct', [$product->id])); ?>" style="padding-bottom: 10px; padding-right: 20px" class="pull-right">
+                                                    <a href="<?php echo e(action('ProductsController@expeditProduct', [$product->id])); ?>" style="padding-bottom: 10px; padding-right: 20px" class="pull-right">
                                                         <button type="button" class="btn ink-reaction btn-icon-toggle"><i class="glyphicon glyphicon-arrow-right" style="font-size: 14px"></i></button>
                                                     </a>
                                                 </li>
@@ -98,7 +98,7 @@
                                         <?php foreach( $products as $product ): ?>
                                             <?php if($product->expedited == 1): ?>
                                                 <li class="tile">
-                                                    <a href="<?php echo e(action('AdminProductsController@showProduct', [$product->id])); ?>" class="tile-content ink-reaction">
+                                                    <a href="<?php echo e(action('ProductsController@showProduct', [$product->id])); ?>" class="tile-content ink-reaction">
                                                         <div class="tile-icon">
                                                             <img src="<?php echo e($product->image); ?>" alt="">
                                                         </div>
@@ -111,10 +111,10 @@
                                                             </small>
                                                         </div>
                                                     </a>
-                                                        <a href="<?php echo e(action('AdminProductsController@destroyProduct', [$product->id])); ?>" class="pull-right" style="padding-bottom: 10px; padding-right: 20px">
+                                                        <a href="<?php echo e(action('ProductsController@destroyProduct', [$product->id])); ?>" class="pull-right" style="padding-bottom: 10px; padding-right: 20px">
                                                             <button type="button" class="btn ink-reaction btn-icon-toggle"><i class="glyphicon glyphicon-trash" style="font-size: 14px"></i></button>
                                                         </a>
-                                                        <a href="<?php echo e(action('AdminProductsController@expeditProduct', [$product->id])); ?>" style="padding-bottom: 10px; padding-right: 20px" class="pull-right">
+                                                        <a href="<?php echo e(action('ProductsController@expeditProduct', [$product->id])); ?>" style="padding-bottom: 10px; padding-right: 20px" class="pull-right">
                                                             <button type="button" class="btn ink-reaction btn-icon-toggle"><i class="glyphicon glyphicon-arrow-down" style="font-size: 14px"></i></button>
                                                         </a>
                                                         <div></div>
