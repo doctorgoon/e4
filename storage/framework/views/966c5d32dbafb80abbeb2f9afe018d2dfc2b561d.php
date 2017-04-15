@@ -20,6 +20,7 @@
                         <a href="<?php echo e(action('CallsController@calls')); ?>" class="btn btn-icon">
                             <i class="glyphicon glyphicon-arrow-left" style="display: inline; font-size: 18px; line-height: 0px;"></i>
                         </a>
+                        &nbsp Ajouter un appel
                     <?php endif; ?>
                 </h3>
             </div>

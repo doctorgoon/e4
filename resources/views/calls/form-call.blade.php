@@ -18,6 +18,7 @@
                         <a href="{{ action('CallsController@calls') }}" class="btn btn-icon">
                             <i class="glyphicon glyphicon-arrow-left" style="display: inline; font-size: 18px; line-height: 0px;"></i>
                         </a>
+                        &nbsp Ajouter un appel
                     @endif
                 </h3>
             </div>

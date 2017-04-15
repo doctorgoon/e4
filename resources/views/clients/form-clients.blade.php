@@ -156,5 +156,6 @@
                 {!! Form::close() !!}
             </div>
         </div>
+
     </div>
 </div><!--end .card --

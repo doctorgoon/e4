@@ -330,7 +330,7 @@ class ProductsController extends Controller
                     }
                     elseif ($id == "A23-0Y") {
                         $name = "Spirobank";
-                        $img  = '\imgs\uploads\SpirobankII.png';
+                        $img  = '\imgs\uploads\Spirobank.png';
                     }
                     elseif ($id == "A23-0W") {
                         $name = "Spirodoc";

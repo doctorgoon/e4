@@ -27,6 +27,7 @@ class AdminController extends Controller
     public function loginUser()
     {
         if (Session::has('email') && Session::has('token')) {
+
             $user = AdminUsers::where([
                 'email' => Session::get('email'),
                 'token' => Session::get('token'),
@@ -34,6 +35,7 @@ class AdminController extends Controller
             ])->get()->first();
 
             if ( ! is_null($user)) {
+
                 return redirect(action('AdminController@dashboard'));
             }
         }

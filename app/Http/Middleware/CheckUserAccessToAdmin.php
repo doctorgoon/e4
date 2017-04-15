@@ -48,6 +48,7 @@ class CheckUserAccessToAdmin
      */
     public function handle($request, Closure $next)
     {
+
         if ($request->route()->uri() != 'administration') {
 
             // We check if the user is connected
@@ -82,7 +83,6 @@ class CheckUserAccessToAdmin
                     }
                     Session::put('users', $users);
 
-
                 } else {
                     // If the user doesn't have the access, we put the old URL in the "from" session
                     Session::put('from', $request->route()->uri());
@@ -94,9 +94,6 @@ class CheckUserAccessToAdmin
 
                 return redirect(action('AdminController@loginUser'));
             }
-        } else {
-            // Login page
-            return redirect(action('AdminController@loginUser'));
         }
 
         return $next($request);

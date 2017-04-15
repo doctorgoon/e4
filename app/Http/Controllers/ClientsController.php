@@ -39,6 +39,30 @@ class ClientsController extends Controller
 
 
     /**
+     * Display a sorted listing of the resource.
+     *
+     * @param $sort
+     * @return \Illuminate\Http\Response
+     * @internal param $request
+     * @internal param string $order
+     */
+    public function clientsSorted($sort)
+    {
+        if($sort == 'firstname') {
+            $clients = Clients::all()->sortBy('firstname');
+        }
+        elseif($sort == 'email') {
+            $clients = Clients::all()->sortBy('email');
+        }
+        else {
+            $clients = Clients::all()->sortBy('lastname');
+        }
+
+        return view('clients.clients', compact('clients'));
+    }
+
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
