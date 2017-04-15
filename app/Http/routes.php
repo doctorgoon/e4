@@ -70,13 +70,12 @@ Route::group(['middleware' => ['admin']], function() {
     Route::post('/administration/tickets/{id}/changer-statut', 'CallsController@postSetStatus');
 
 // CLIENTS
-    Route::get('/administration/clients', 'ClientsController@clients');
-    Route::get('/administration/clients/sorted/{sort}', 'ClientsController@clientsSorted');
+    Route::get('/administration/clients/{sort?}', 'ClientsController@clients')->defaults('sort', 'lastname');
     Route::get('/administration/clients/nouveau', 'ClientsController@addClient');
     Route::get('/administration/clients/call/{id}/nouveau', 'ClientsController@addClientCall');
     Route::post('/administration/clients/call/{id}/nouveau', 'ClientsController@postAddClientCall');
     Route::post('/administration/clients/rechercher-client/{origin}', 'ClientsController@postSearchClient');
-    Route::get('/administration/clients/{id}', 'ClientsController@showClient');
+    Route::get('/administration/clients/id/{id}', 'ClientsController@showClient');
     Route::post('/administration/clients/nouveau', 'ClientsController@postAddClient');
     Route::get('/administration/clients/{id}/modifier', 'ClientsController@editClient');
     Route::post('/administration/clients/{id}/modifier', 'ClientsController@postEditClient');

@@ -52,17 +52,18 @@
                                 <span class="text-light text-lg"><strong>{{$clients->count()}} client(s)</strong></span>
                                 <div class="btn-group btn-group-sm pull-right">
                                     <button type="button" class="btn btn-default-light dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                        <span class="glyphicon glyphicon-arrow-down"></span> Sort
+                                        <span class="glyphicon glyphicon-arrow-down"></span> Trier
                                     </button>
                                     <ul class="dropdown-menu dropdown-menu-right animation-dock" role="menu">
-                                        <li><a href={{action('ClientsController@clientsSorted', ['firstname'])}}>Prénom</a></li>
-                                        <li><a href={{action('ClientsController@clientsSorted', ['lastname'])}}>Nom</a></li>
-                                        <li><a href={{action('ClientsController@clientsSorted', ['email'])}}>Adresse Email</a></li>
+                                        <li><a href={{action('ClientsController@clients', ['firstname'])}}>Prénom</a></li>
+                                        <li><a href={{action('ClientsController@clients', ['lastname'])}}>Nom</a></li>
+                                        <li><a href={{action('ClientsController@clients', ['email'])}}>Adresse Email</a></li>
                                     </ul>
                                 </div>
                             </div><!--end .margin-bottom-xxl -->
                             <div class="list-results">
                                 @if(count($clients) < 1)
+                                    <br>
                                     AUCUN CLIENT TROUVÉ
                                 @else
                                 @foreach($clients as $client)

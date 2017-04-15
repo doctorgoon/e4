@@ -13,49 +13,35 @@ use Illuminate\Support\Facades\Session;
 
 class ClientsController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
-     * @param $request
+     * @param Request $request
+     * @param $sort
      * @return \Illuminate\Http\Response
      * @internal param string $order
      */
-    public function clients(Request $request)
+    public function clients(Request $request, $sort)
     {
         $search = $request->input('contactSearch');
 
-        if(is_null($search)) {
-            $clients = Clients::all()->sortBy('lastname');
-        }
-        else {
+        if( ! is_null($search)) {
             $clients = Clients::where('lastname','like','%'.$search.'%')
                 ->orWhere('firstname','like','%'.$search.'%')
                 ->orWhere('company','like','%'.$search.'%')
                 ->orderBy('lastname', 'asc')->get();
         }
-
-        return view('clients.clients', compact('clients'));
-    }
-
-
-    /**
-     * Display a sorted listing of the resource.
-     *
-     * @param $sort
-     * @return \Illuminate\Http\Response
-     * @internal param $request
-     * @internal param string $order
-     */
-    public function clientsSorted($sort)
-    {
-        if($sort == 'firstname') {
-            $clients = Clients::all()->sortBy('firstname');
-        }
-        elseif($sort == 'email') {
-            $clients = Clients::all()->sortBy('email');
-        }
         else {
-            $clients = Clients::all()->sortBy('lastname');
+            if($sort == 'firstname') {
+                $clients = Clients::all()->sortBy('firstname');
+            }
+            elseif($sort == 'email') {
+                $clients = Clients::all()->sortBy('email');
+            }
+            else {
+                $clients = Clients::all()->sortBy('lastname');
+            }
         }
 
         return view('clients.clients', compact('clients'));
@@ -78,6 +64,8 @@ class ClientsController extends Controller
 
         return view('clients.add-client-call', compact('call'));
     }
+
+
     /**
      * Store a newly created resource in storage.
      *
