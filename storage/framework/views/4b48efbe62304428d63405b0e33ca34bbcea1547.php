@@ -22,19 +22,50 @@
                             </div>
                             <br/>
                             <div class="row">
-                                <!--<div class="col-xs-6 text-left">
-                                    <div class="checkbox checkbox-inline checkbox-styled">
-                                        <label>
-                                            <input type="checkbox"> <span>Se souvenir de moi</span>
-                                        </label>
-                                    </div>
-                                </div>-->
                                 <div class="col-xs-6 text-right">
                                     <button class="btn btn-primary btn-raised" type="submit">Connexion</button>
                                 </div>
                             </div>
                         <?php echo Form::close(); ?>
 
+                        <br>
+                        <br>
+                        <div class="card">
+                            <div class="card-body no-padding">
+                                <ul class="list divider-full-bleed">
+                                    <li class="tile">
+                                        <a class="tile-content ink-reaction" href="<?php echo e(asset('/project_1.pdf')); ?>">
+                                            <div class="tile-icon">
+                                                <i class="fa fa-inbox"></i>
+                                            </div>
+                                            <div class="tile-text">
+                                                PDF Projet 1
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="tile">
+                                        <a class="tile-content ink-reaction" href="<?php echo e(asset('/project_2.pdf')); ?>">
+                                            <div class="tile-icon">
+                                                <i class="fa fa-inbox"></i>
+                                            </div>
+                                            <div class="tile-text">
+                                                PDF Projet 2
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="tile">
+                                        <a class="tile-content ink-reaction" href="/app/apk">
+                                            <div class="tile-icon">
+                                                <i class="fa fa-cloud-download"></i>
+                                            </div>
+                                            <div class="tile-text">
+                                                Fichier .apk
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div><!--end .card-body -->
+                        </div>
                     </div><!--end .col -->
 
                 </div><!--end .row -->

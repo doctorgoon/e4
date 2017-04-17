@@ -283,6 +283,7 @@ class ProductsController extends Controller
             if(array_key_exists('serial_number', $json)) {
 
                 if (substr($json['serial_number'], 0, 3) == "A23") {
+
                     $product = Products::where('ref', $json['serial_number'])->get()->first();
 
                     if ( is_null($product)) {
@@ -304,7 +305,6 @@ class ProductsController extends Controller
 
             }
         }
-
         return ['error' => 'Invalid request']; // 0 = Reserved to Android app
     }
 

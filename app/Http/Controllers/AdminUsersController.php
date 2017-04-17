@@ -114,6 +114,8 @@ class AdminUsersController extends Controller
 
             $user->firstname = $request->input('firstname');
             $user->lastname  = $request->input('lastname');
+            $user->email     = $request->input('email');
+
             $user->save();
 
             Session::flash('flash_message', 'L\'utilisateur a bien été modifié.');

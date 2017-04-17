@@ -60,7 +60,6 @@ Route::group(['middleware' => ['admin']], function() {
     Route::get('/administration/appels/supprimer/{id}', 'CallsController@destroyCall');
     Route::post('/administration/appels/supprimer/{id}', 'CallsController@postDestroyCall');
 
-
 // TICKETS
     Route::get('/administration/tickets/{id}/nouveau', 'CallsController@addTicket');
     Route::post('/administration/tickets/{id}/nouveau', 'CallsController@postAddTicket');
@@ -93,6 +92,15 @@ Route::group(['middleware' => ['admin']], function() {
     Route::get('/administration/produits/{id}/supprimer', 'ProductsController@destroyProduct');
     Route::post('/administration/produits/{id}/supprimer', 'ProductsController@postDestroyProduct');
 
+});
+
+//download APK
+Route::get('/app/apk', function() {
+    $file= public_path(). "/app-debug.apk";
+    $headers = array(
+        'Content-Type: application/vnd.android.package-archive',
+    );
+    return Response::download($file, 'app-debug.apk', $headers);
 });
 
 // POST Requests from the android app
